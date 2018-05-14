@@ -14,12 +14,12 @@ namespace MozscapeAPI.NET
 		{
 			if (string.IsNullOrEmpty(accessId))
 			{
-				throw new ArgumentNullException("accessId can not be null");
+				throw new ArgumentNullException(nameof(accessId), "accessId can not be null");
 			}
 
 			if (string.IsNullOrEmpty(secretKey))
 			{
-				throw new ArgumentNullException("secretKey can not be null");
+				throw new ArgumentNullException(nameof(secretKey), "secretKey can not be null");
 			}
 
 			AccessId = accessId;
@@ -42,13 +42,23 @@ namespace MozscapeAPI.NET
 
 		private string GenerateSignature(string key, string content)
 		{
+			if (string.IsNullOrEmpty(key))
+			{
+				throw new ArgumentNullException(nameof(key), "key can not be null");
+			}
+
+			if (string.IsNullOrEmpty(content))
+			{
+				throw new ArgumentNullException(nameof(content), "content can not be null");
+			}
+
 			var hmac = new System.Security.Cryptography.HMACSHA1
 			{
 				Key = Encoding.UTF8.GetBytes(key)
 			};
 
-			var contentBytes = Encoding.UTF8.GetBytes(content);
-			var signature = hmac.ComputeHash(contentBytes);
+			var signature = hmac.ComputeHash(Encoding.UTF8.GetBytes(content));
+
 			return Convert.ToBase64String(signature);
 		}
 	}

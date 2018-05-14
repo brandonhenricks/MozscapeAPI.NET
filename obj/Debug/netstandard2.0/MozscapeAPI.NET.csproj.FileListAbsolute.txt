@@ -1,7 +1,6 @@
 /Users/brandonhenricks/Projects/MozscapeAPI.NET/MozscapeAPI.NET/bin/Debug/netstandard2.0/MozscapeAPI.NET.deps.json
 /Users/brandonhenricks/Projects/MozscapeAPI.NET/MozscapeAPI.NET/bin/Debug/netstandard2.0/MozscapeAPI.NET.dll
 /Users/brandonhenricks/Projects/MozscapeAPI.NET/MozscapeAPI.NET/bin/Debug/netstandard2.0/MozscapeAPI.NET.pdb
-/Users/brandonhenricks/Projects/MozscapeAPI.NET/MozscapeAPI.NET/obj/Debug/netstandard2.0/MozscapeAPI.NET.csprojResolveAssemblyReference.cache
 /Users/brandonhenricks/Projects/MozscapeAPI.NET/MozscapeAPI.NET/obj/Debug/netstandard2.0/MozscapeAPI.NET.csproj.CoreCompileInputs.cache
 /Users/brandonhenricks/Projects/MozscapeAPI.NET/MozscapeAPI.NET/obj/Debug/netstandard2.0/MozscapeAPI.NET.AssemblyInfoInputs.cache
 /Users/brandonhenricks/Projects/MozscapeAPI.NET/MozscapeAPI.NET/obj/Debug/netstandard2.0/MozscapeAPI.NET.AssemblyInfo.cs

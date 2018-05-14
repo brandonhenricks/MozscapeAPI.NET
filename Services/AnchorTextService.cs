@@ -9,7 +9,7 @@ namespace MozscapeAPI.NET.Services
 
 		public AnchorTextService(ApiAuthorization apiAuthorization)
 		{
-			_apiAuthorization = apiAuthorization ?? throw new ArgumentNullException("apiAuthorization can not be null");
+			_apiAuthorization = apiAuthorization ?? throw new ArgumentNullException(nameof(apiAuthorization), "apiAuthorization can not be null");
 		}
 
 		#region IDisposable Support
