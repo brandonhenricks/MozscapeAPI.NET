@@ -14,7 +14,7 @@ namespace MozscapeAPI.NET.Services
 			_apiAuthorization = apiAuthorization ?? throw new ArgumentNullException(nameof(apiAuthorization), "apiAuthorization can not be null");
 		}
 
-		public T GetResult<T>(ApiAuthorization apiAuthorization, string targetUrl)
+		public T GetResult<T>(string targetUrl)
 		{
 			throw new NotImplementedException();
 		}
