@@ -1,15 +1,27 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading.Tasks;
+using MozscapeAPI.NET.Interfaces;
 
 namespace MozscapeAPI.NET.Services
 {
-	public class AnchorTextService : IDisposable
+	public class AnchorTextService : IAnchorTextService
 	{
 		private readonly ApiAuthorization _apiAuthorization;
 
 		public AnchorTextService(ApiAuthorization apiAuthorization)
 		{
 			_apiAuthorization = apiAuthorization ?? throw new ArgumentNullException(nameof(apiAuthorization), "apiAuthorization can not be null");
+		}
+
+		public T GetResult<T>(ApiAuthorization apiAuthorization, string targetUrl)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<T> GetResultAsync<T>(string targetUrl)
+		{
+			throw new NotImplementedException();
 		}
 
 		#region IDisposable Support
@@ -45,6 +57,8 @@ namespace MozscapeAPI.NET.Services
 			// TODO: uncomment the following line if the finalizer is overridden above.
 			// GC.SuppressFinalize(this);
 		}
+
+
 		#endregion
 	}
 }
