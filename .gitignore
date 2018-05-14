@@ -328,3 +328,7 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+*.pdb
+
+bin/Debug/netstandard2.0/MozscapeAPI.NET.dll
