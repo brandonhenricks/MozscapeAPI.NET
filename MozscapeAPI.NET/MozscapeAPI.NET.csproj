@@ -11,6 +11,8 @@
     <Folder Include="Interfaces\" />
     <Folder Include="Services\" />
     <Folder Include="Authorization\" />
+    <Folder Include="Response\" />
+    <Folder Include="Constants\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="RestSharp" Version="106.2.2" />

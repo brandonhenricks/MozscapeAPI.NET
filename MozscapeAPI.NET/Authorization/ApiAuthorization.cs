@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Net;
 using System.Text;
-using System.Security;
 using MozscapeAPI.NET.Interfaces;
 
 namespace MozscapeAPI.NET.Authorization
 {
 	public class ApiAuthorization : IApiAuthorization
 	{
+		#region Public Properties
 		public string AccessId { get; }
-
 		public string SecretKey { get; }
-
 		public long ExpiresInterval { get; }
+		#endregion
 
+		#region Constructors
 		public ApiAuthorization(string accessId, string secretKey, long expiresInterval)
 		{
 
@@ -30,8 +30,9 @@ namespace MozscapeAPI.NET.Authorization
 			SecretKey = secretKey;
 			ExpiresInterval = expiresInterval;
 		}
+		#endregion
 
-
+		#region Public Methods
 		public string GetAuthenticationString()
 		{
 			long expires = ((new DateTime().Millisecond) / 1000 + ExpiresInterval);
@@ -44,7 +45,9 @@ namespace MozscapeAPI.NET.Authorization
 
 			return String.Format("AccessID={0}&Expires={1}&Signature={2}", AccessId, expires, urlSafeSignature);
 		}
+		#endregion
 
+		#region Private Methods
 		private string GenerateSignature(string key, string content)
 		{
 			if (string.IsNullOrEmpty(key))
@@ -73,5 +76,6 @@ namespace MozscapeAPI.NET.Authorization
 				throw ex;
 			}
 		}
+		#endregion
 	}
 }

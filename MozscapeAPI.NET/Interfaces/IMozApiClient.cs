@@ -1,8 +1,8 @@
 ﻿using System;
 namespace MozscapeAPI.NET.Interfaces
 {
-	public interface IMozApiClient : IDisposable
+	public interface IMozApiClient
 	{
-
+		T GetApiResult<T>(String targetUrl);
 	}
 }
