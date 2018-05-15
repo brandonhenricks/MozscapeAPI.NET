@@ -16,7 +16,6 @@ namespace MozscapeAPI.NET.Authorization
 		#region Constructors
 		public ApiAuthorization(string accessId, string secretKey, long expiresInterval)
 		{
-
 			if (string.IsNullOrEmpty(accessId))
 			{
 				throw new ArgumentNullException(nameof(accessId), "accessId can not be null");
@@ -26,6 +25,7 @@ namespace MozscapeAPI.NET.Authorization
 			{
 				throw new ArgumentNullException(nameof(secretKey), "secretKey can not be null");
 			}
+
 			AccessId = accessId;
 			SecretKey = secretKey;
 			ExpiresInterval = expiresInterval;

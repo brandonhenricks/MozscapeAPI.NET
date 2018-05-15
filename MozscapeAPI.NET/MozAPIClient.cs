@@ -1,31 +1,36 @@
 ﻿using System;
 using MozscapeAPI.NET.Interfaces;
 using RestSharp;
+using MozscapeAPI.NET.Services;
 namespace MozscapeAPI.NET
 {
-	public class MozApiClient : IMozApiClient, IDisposable
+	public class MozApiClient : IMozApiClient
 	{
-		private readonly IApiAuthorization _apiAuthorization;
-		private readonly IRestClient _restClient;
 		private readonly String _endPoint;
+		private readonly IApiService _apiService;
 
 		public MozApiClient(IApiAuthorization apiAuthorization, string endPoint)
 		{
-			_apiAuthorization = apiAuthorization ?? throw new ArgumentNullException(nameof(apiAuthorization), "apiAuthorization can not be null");
+			if (apiAuthorization == null)
+			{
+				throw new ArgumentNullException(nameof(apiAuthorization));
+			}
 
 			if (string.IsNullOrEmpty(endPoint))
 			{
 				throw new ArgumentNullException(nameof(endPoint));
 			}
+
 			_endPoint = endPoint;
-			_restClient = new RestClient(endPoint);
+
+			_apiService = new ApiService(apiAuthorization, new RestClient(endPoint));
 		}
 
 		public T GetApiResult<T>(String targetUrl)
 		{
 			var request = new RestRequest(targetUrl, Method.GET);
 
-			var result = _restClient.Execute(request);
+			//var result = _restClient.Execute(request);
 
 			throw new NotImplementedException();
 		}
@@ -40,6 +45,7 @@ namespace MozscapeAPI.NET
 				if (disposing)
 				{
 					// TODO: dispose managed state (managed objects).
+					_apiService.Dispose();
 				}
 
 				// TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
