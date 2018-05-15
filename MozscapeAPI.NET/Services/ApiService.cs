@@ -17,8 +17,8 @@ namespace MozscapeAPI.NET.Services
 		/// <param name="restClient">Rest client.</param>
 		public ApiService(IApiAuthorization apiAuthorization, IRestClient restClient)
 		{
-			_apiAuthorization = apiAuthorization;
-			_restClient = restClient;
+			_apiAuthorization = apiAuthorization ?? throw new ArgumentNullException(nameof(apiAuthorization));
+			_restClient = restClient ?? throw new ArgumentNullException(nameof(restClient));
 		}
 
 		/// <summary>
