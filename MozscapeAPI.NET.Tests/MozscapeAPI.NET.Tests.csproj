@@ -12,6 +12,10 @@
     <PackageReference Include="NUnit.Console" Version="3.8.0" />
     <PackageReference Include="NUnit.ConsoleRunner" Version="3.8.0" />
     <PackageReference Include="NSubstitute" Version="3.1.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MozscapeAPI.NET\MozscapeAPI.NET.csproj" />
+  </ItemGroup>
 </Project>
