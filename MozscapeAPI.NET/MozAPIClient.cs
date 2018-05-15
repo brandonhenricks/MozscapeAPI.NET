@@ -28,9 +28,7 @@ namespace MozscapeAPI.NET
 
 		public T GetApiResult<T>(String targetUrl)
 		{
-			var request = new RestRequest(targetUrl, Method.GET);
-
-			//var result = _restClient.Execute(request);
+			var request = _apiService.GetResponse(targetUrl);
 
 			throw new NotImplementedException();
 		}

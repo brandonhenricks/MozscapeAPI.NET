@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using MozscapeAPI.NET.Interfaces;
 using RestSharp;
 
@@ -9,10 +10,49 @@ namespace MozscapeAPI.NET.Services
 		private readonly IApiAuthorization _apiAuthorization;
 		private readonly IRestClient _restClient;
 
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="apiAuthorization">API authorization.</param>
+		/// <param name="restClient">Rest client.</param>
 		public ApiService(IApiAuthorization apiAuthorization, IRestClient restClient)
 		{
 			_apiAuthorization = apiAuthorization;
 			_restClient = restClient;
+		}
+
+		/// <summary>
+		/// Gets the response.
+		/// </summary>
+		/// <returns>The response.</returns>
+		/// <param name="targetUrl">Target URL.</param>
+		public IRestResponse GetResponse(string targetUrl)
+		{
+			if (String.IsNullOrEmpty(targetUrl))
+			{
+				throw new ArgumentNullException(nameof(targetUrl));
+			}
+
+			var restRequest = new RestRequest(targetUrl, Method.GET);
+
+			return _restClient.Execute(restRequest);
+		}
+
+		/// <summary>
+		/// Gets the response async.
+		/// </summary>
+		/// <returns>The response async.</returns>
+		/// <param name="targetUrl">Target URL.</param>
+		public Task<IRestResponse> GetResponseAsync(string targetUrl)
+		{
+			if (String.IsNullOrEmpty(targetUrl))
+			{
+				throw new ArgumentNullException(nameof(targetUrl));
+			}
+
+			var restRequest = new RestRequest(targetUrl, Method.GET);
+
+			return _restClient.ExecuteGetTaskAsync(restRequest);
 		}
 
 		#region IDisposable Support
@@ -48,6 +88,7 @@ namespace MozscapeAPI.NET.Services
 			// TODO: uncomment the following line if the finalizer is overridden above.
 			// GC.SuppressFinalize(this);
 		}
+
 		#endregion
 	}
 }
