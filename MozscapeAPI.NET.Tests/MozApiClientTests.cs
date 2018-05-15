@@ -1,11 +1,12 @@
 using System;
-using Xunit;
+using NUnit.Framework;
 
 namespace MozscapeAPI.NET.Tests
 {
+	[TestFixture]
 	public class MozApiClientTests
 	{
-		[Fact]
+		[Test]
 		public void Test1()
 		{
 
