@@ -24,9 +24,27 @@ namespace MozscapeAPI.NET.Tests
 		}
 
 		[Test]
-		public void MozApiClient_Constructor_Null_SecretKey_Throws_exception()
+		public void ApiAuthorization_Constructor_Null_SecretKey_Throws_exception()
 		{
 			Assert.Throws<ArgumentNullException>(() => new ApiAuthorization("test", null, 0));
+		}
+
+		[Test]
+		public void ApiAuthorization_Valid_Constructor_Returns_Class()
+		{
+			var result = new ApiAuthorization("test", "test", 1);
+
+			Assert.NotNull(result);
+		}
+
+		[Test]
+		public void ApiAuthorization_GetAuthenticationString_Returns_String()
+		{
+			var apiAuthorization = new ApiAuthorization("test", "test", 1);
+
+			var result = apiAuthorization.GetAuthenticationString();
+
+			Assert.NotNull(result);
 		}
 	}
 }
