@@ -1,17 +1,22 @@
 ﻿using System;
-using System.Text;
 using System.Net;
+using System.Text;
+using System.Security;
+using MozscapeAPI.NET.Interfaces;
 
-namespace MozscapeAPI.NET
+namespace MozscapeAPI.NET.Authorization
 {
-	public class ApiAuthorization
+	public class ApiAuthorization : IApiAuthorization
 	{
-		public string AccessId { get; private set; }
-		public string SecretKey { get; private set; }
-		public long ExpiresInterval { get; private set; }
+		public string AccessId { get; }
 
-		public ApiAuthorization(string accessId, string secretKey, long expires)
+		public string SecretKey { get; }
+
+		public long ExpiresInterval { get; }
+
+		public ApiAuthorization(string accessId, string secretKey, long expiresInterval)
 		{
+
 			if (string.IsNullOrEmpty(accessId))
 			{
 				throw new ArgumentNullException(nameof(accessId), "accessId can not be null");
@@ -21,11 +26,11 @@ namespace MozscapeAPI.NET
 			{
 				throw new ArgumentNullException(nameof(secretKey), "secretKey can not be null");
 			}
-
 			AccessId = accessId;
 			SecretKey = secretKey;
-			ExpiresInterval = expires;
+			ExpiresInterval = expiresInterval;
 		}
+
 
 		public string GetAuthenticationString()
 		{
@@ -57,9 +62,16 @@ namespace MozscapeAPI.NET
 				Key = Encoding.UTF8.GetBytes(key)
 			};
 
-			var signature = hmac.ComputeHash(Encoding.UTF8.GetBytes(content));
+			try
+			{
+				var signature = hmac.ComputeHash(Encoding.UTF8.GetBytes(content));
 
-			return Convert.ToBase64String(signature);
+				return Convert.ToBase64String(signature);
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 	}
 }
