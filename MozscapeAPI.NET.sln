@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MozscapeAPI.NET", "MozscapeAPI.NET\MozscapeAPI.NET.csproj", "{1D28454A-F746-443F-9703-FA4A0FAEF8EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MozscapeAPI.NET.Tests", "MozscapeAPI.NET.Tests\MozscapeAPI.NET.Tests.csproj", "{43ADE5A7-934E-495A-A4CD-FF93E0C3B3C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +15,9 @@ Global
 		{1D28454A-F746-443F-9703-FA4A0FAEF8EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D28454A-F746-443F-9703-FA4A0FAEF8EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D28454A-F746-443F-9703-FA4A0FAEF8EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43ADE5A7-934E-495A-A4CD-FF93E0C3B3C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43ADE5A7-934E-495A-A4CD-FF93E0C3B3C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43ADE5A7-934E-495A-A4CD-FF93E0C3B3C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43ADE5A7-934E-495A-A4CD-FF93E0C3B3C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
