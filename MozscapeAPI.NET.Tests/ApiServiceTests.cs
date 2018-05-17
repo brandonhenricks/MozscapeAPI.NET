@@ -25,10 +25,23 @@ namespace MozscapeAPI.NET.Tests
 		}
 
 		[Test]
-		public void ApiService_Constructor_Null_RestClient_Throws_exception()
+		public void ApiService_GetResponse_Null_Argument_Throws_Exception()
 		{
+			var restClient = Substitute.For<IRestClient>();
 			var apiAuth = Substitute.For<IApiAuthorization>();
-			Assert.Throws<ArgumentNullException>(() => new MozApiClient(apiAuth, null));
+			var apiService = new ApiService(apiAuth, restClient);
+
+			Assert.Throws<ArgumentNullException>(() => apiService.GetResponse(null));
+		}
+
+		[Test]
+		public void ApiService_GetResponseAsync_Null_Argument_Throws_Exception()
+		{
+			var restClient = Substitute.For<IRestClient>();
+			var apiAuth = Substitute.For<IApiAuthorization>();
+			var apiService = new ApiService(apiAuth, restClient);
+
+			Assert.Throws<ArgumentNullException>(() => apiService.GetResponseAsync(null));
 		}
 	}
 }
