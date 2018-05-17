@@ -4,6 +4,8 @@ using RestSharp;
 using MozscapeAPI.NET.Services;
 using System.Threading.Tasks;
 using EnsureThat;
+using MozscapeAPI.NET.Enums;
+using MozscapeAPI.NET.Request;
 
 namespace MozscapeAPI.NET
 {
@@ -12,6 +14,13 @@ namespace MozscapeAPI.NET
 		private readonly String _endPoint;
 		private readonly IApiService _apiService;
 
+		#region Constructor
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:MozscapeAPI.NET.MozApiClient"/> class.
+		/// </summary>
+		/// <param name="apiAuthorization">API authorization.</param>
+		/// <param name="endPoint">End point.</param>
 		public MozApiClient(IApiAuthorization apiAuthorization, string endPoint)
 		{
 			if (apiAuthorization == null)
@@ -28,10 +37,11 @@ namespace MozscapeAPI.NET
 
 			_apiService = new ApiService(apiAuthorization, new RestClient(endPoint));
 		}
+		#endregion
 
 		public T GetApiResult<T>(String targetUrl)
 		{
-			Ensure.That(targetUrl).IsNotNullOrEmpty();
+			Ensure.That(targetUrl, nameof(targetUrl)).IsNotNullOrEmpty();
 
 			var request = _apiService.GetResponse(targetUrl);
 
@@ -40,15 +50,14 @@ namespace MozscapeAPI.NET
 
 		public Task<T> GetApiResultAsync<T>(string targetUrl)
 		{
-			Ensure.That(targetUrl).IsNotNullOrEmpty();
+			Ensure.That(targetUrl, nameof(targetUrl)).IsNotNullOrEmpty();
 			var request = _apiService.GetResponseAsync(targetUrl);
 			throw new NotImplementedException();
 		}
 
-		public string GetQueryString(string targetUrl, int cols)
+		public IApiRequest CreateApiRequest(string targetUrl, ApiType apiType, int cols, int limit)
 		{
-			Ensure.That(targetUrl).IsNotNullOrEmpty();
-			throw new NotImplementedException();
+			return new ApiRequest(targetUrl, apiType, cols, limit);
 		}
 
 		#region IDisposable Support

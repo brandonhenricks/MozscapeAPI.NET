@@ -29,7 +29,7 @@ namespace MozscapeAPI.NET.Services
 		/// <param name="targetUrl">Target URL.</param>
 		public IRestResponse GetResponse(string targetUrl)
 		{
-			Ensure.That(targetUrl).IsNotNullOrEmpty();
+			Ensure.That(targetUrl, nameof(targetUrl)).IsNotNullOrEmpty();
 			var restRequest = new RestRequest(targetUrl, Method.GET);
 
 			return _restClient.Execute(restRequest);
@@ -42,7 +42,7 @@ namespace MozscapeAPI.NET.Services
 		/// <param name="targetUrl">Target URL.</param>
 		public Task<IRestResponse> GetResponseAsync(string targetUrl)
 		{
-			Ensure.That(targetUrl).IsNotNullOrEmpty();
+			Ensure.That(targetUrl, nameof(targetUrl)).IsNotNullOrEmpty();
 			var restRequest = new RestRequest(targetUrl, Method.GET);
 
 			return _restClient.ExecuteGetTaskAsync(restRequest);

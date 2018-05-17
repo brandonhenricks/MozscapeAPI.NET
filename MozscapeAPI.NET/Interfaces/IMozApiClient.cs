@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using MozscapeAPI.NET.Enums;
 
 namespace MozscapeAPI.NET.Interfaces
 {
@@ -7,6 +8,6 @@ namespace MozscapeAPI.NET.Interfaces
 	{
 		T GetApiResult<T>(String targetUrl);
 		Task<T> GetApiResultAsync<T>(String targetUrl);
-		String GetQueryString(String targetUrl, int cols);
+		IApiRequest CreateApiRequest(String targetUrl, ApiType apiType, int cols, int limit);
 	}
 }

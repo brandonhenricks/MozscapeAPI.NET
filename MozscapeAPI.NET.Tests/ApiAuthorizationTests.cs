@@ -1,9 +1,5 @@
 ﻿using System;
 using NUnit.Framework;
-using MozscapeAPI.NET.Interfaces;
-using NSubstitute.Exceptions;
-using NSubstitute;
-using System.Xml.Linq;
 using MozscapeAPI.NET.Authorization;
 
 namespace MozscapeAPI.NET.Tests
@@ -35,6 +31,30 @@ namespace MozscapeAPI.NET.Tests
 			var result = new ApiAuthorization("test", "test", 1);
 
 			Assert.NotNull(result);
+		}
+
+		[Test]
+		public void ApiAuthorization_AccessId_Property_Set()
+		{
+			var result = new ApiAuthorization("test", "test", 1);
+
+			Assert.AreEqual("test", result.AccessId);
+		}
+
+		[Test]
+		public void ApiAuthorization_SecretKey_Property_Set()
+		{
+			var result = new ApiAuthorization("test", "test", 1);
+
+			Assert.AreEqual("test", result.SecretKey);
+		}
+
+		[Test]
+		public void ApiAuthorization_ExpiresInterval_Property_Set()
+		{
+			var result = new ApiAuthorization("test", "test", 1);
+
+			Assert.AreEqual(1, result.ExpiresInterval);
 		}
 
 		[Test]
