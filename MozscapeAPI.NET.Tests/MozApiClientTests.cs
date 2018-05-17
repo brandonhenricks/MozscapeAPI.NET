@@ -42,7 +42,7 @@ namespace MozscapeAPI.NET.Tests
 		{
 			var apiAuth = Substitute.For<IApiAuthorization>();
 			var apiClient = new MozApiClient(apiAuth, "http://test.com");
-			Assert.Throws<ArgumentNullException>(() => apiClient.CreateApiRequest(null, Enums.ApiType.ANCHORTEXT, 0, 0));
+			Assert.Throws<ArgumentNullException>(() => apiClient.CreateApiRequest(apiAuth, null, Enums.ApiType.ANCHORTEXT, 0, 0));
 		}
 	}
 }

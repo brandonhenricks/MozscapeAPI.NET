@@ -55,9 +55,9 @@ namespace MozscapeAPI.NET
 			throw new NotImplementedException();
 		}
 
-		public IApiRequest CreateApiRequest(string targetUrl, ApiType apiType, int cols, int limit)
+		public IApiRequest CreateApiRequest(IApiAuthorization apiAuthorization, string targetUrl, ApiType apiType, int cols, int limit)
 		{
-			return new ApiRequest(targetUrl, apiType, cols, limit);
+			return new ApiRequest(apiAuthorization, targetUrl, apiType, cols, limit);
 		}
 
 		#region IDisposable Support

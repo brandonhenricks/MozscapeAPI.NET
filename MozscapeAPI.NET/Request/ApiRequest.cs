@@ -6,6 +6,7 @@ namespace MozscapeAPI.NET.Request
 {
 	public class ApiRequest : IApiRequest
 	{
+		public IApiAuthorization Authorization { get; }
 		public string TargetUrl { get; }
 		public ApiType ApiType { get; }
 		public int Cols { get; }
@@ -16,14 +17,16 @@ namespace MozscapeAPI.NET.Request
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:MozscapeAPI.NET.Request.ApiRequest"/> class.
 		/// </summary>
+		/// <param name="apiAuthorization">API authorization.</param>
 		/// <param name="targetUrl">Target URL.</param>
 		/// <param name="apiType">API type.</param>
 		/// <param name="cols">Cols.</param>
 		/// <param name="limit">Limit.</param>
-		public ApiRequest(string targetUrl, ApiType apiType, int cols, int limit)
+		public ApiRequest(IApiAuthorization apiAuthorization, string targetUrl, ApiType apiType, int cols, int limit)
 		{
 			Ensure.That(targetUrl, nameof(targetUrl)).IsNotNullOrEmpty();
-
+			Ensure.That(apiAuthorization, nameof(apiAuthorization)).IsNotNull();
+			Authorization = apiAuthorization;
 			TargetUrl = targetUrl;
 			ApiType = apiType;
 			Cols = cols;
@@ -33,13 +36,15 @@ namespace MozscapeAPI.NET.Request
 		/// <summary>
 		/// Initializes a new instance of the <see cref="T:MozscapeAPI.NET.Request.ApiRequest"/> class.
 		/// </summary>
+		/// <param name="apiAuthorization">API authorization.</param>
 		/// <param name="targetUrl">Target URL.</param>
 		/// <param name="apiType">API type.</param>
 		/// <param name="cols">Cols.</param>
-		public ApiRequest(string targetUrl, ApiType apiType, int cols)
+		public ApiRequest(IApiAuthorization apiAuthorization, string targetUrl, ApiType apiType, int cols)
 		{
 			Ensure.That(targetUrl, nameof(targetUrl)).IsNotNullOrEmpty();
-
+			Ensure.That(apiAuthorization, nameof(apiAuthorization)).IsNotNull();
+			Authorization = apiAuthorization;
 			TargetUrl = targetUrl;
 			ApiType = apiType;
 			Cols = cols;

@@ -8,6 +8,6 @@ namespace MozscapeAPI.NET.Interfaces
 	{
 		T GetApiResult<T>(String targetUrl);
 		Task<T> GetApiResultAsync<T>(String targetUrl);
-		IApiRequest CreateApiRequest(String targetUrl, ApiType apiType, int cols, int limit);
+		IApiRequest CreateApiRequest(IApiAuthorization apiAuthorization, String targetUrl, ApiType apiType, int cols, int limit);
 	}
 }
