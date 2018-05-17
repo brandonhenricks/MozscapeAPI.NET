@@ -5,7 +5,7 @@ namespace MozscapeAPI.NET.Interfaces
 {
 	public interface IApiService : IDisposable
 	{
-		IRestResponse GetResponse(String targetUrl);
-		Task<IRestResponse> GetResponseAsync(String targetUrl);
+		IRestResponse GetResponse(IApiRequest apiRequest);
+		Task<IRestResponse> GetResponseAsync(IApiRequest apiRequest);
 	}
 }

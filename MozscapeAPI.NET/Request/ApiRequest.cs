@@ -7,6 +7,7 @@ namespace MozscapeAPI.NET.Request
 {
 	public class ApiRequest : IApiRequest
 	{
+		#region Public Properties
 		public IApiAuthorization Authorization { get; }
 		public string TargetUrl { get; }
 		public ApiType ApiType { get; }
@@ -14,6 +15,8 @@ namespace MozscapeAPI.NET.Request
 		public int Limit { get; }
 		public string Scope { get; }
 		public string Sort { get; }
+		#endregion
+
 		#region Public Constructors
 
 		/// <summary>
@@ -53,8 +56,29 @@ namespace MozscapeAPI.NET.Request
 			Limit = 0;
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:MozscapeAPI.NET.Request.ApiRequest"/> class.
+		/// </summary>
+		/// <param name="apiAuthorization">API authorization.</param>
+		/// <param name="targetUrl">Target URL.</param>
+		/// <param name="apiType">API type.</param>
+		/// <param name="cols">Cols.</param>
+		public ApiRequest(IApiAuthorization apiAuthorization, string targetUrl, ApiType apiType, int cols, string scope, string sort)
+		{
+			Ensure.That(targetUrl, nameof(targetUrl)).IsNotNullOrEmpty();
+			Ensure.That(apiAuthorization, nameof(apiAuthorization)).IsNotNull();
+			Authorization = apiAuthorization;
+			TargetUrl = targetUrl;
+			ApiType = apiType;
+			Cols = cols;
+			Limit = 0;
+			Scope = scope;
+			Sort = sort;
+		}
+
 		#endregion
 
+		#region Public Methods
 		public string GetSafeUrl()
 		{
 			var uri = new Uri(TargetUrl);
@@ -64,6 +88,7 @@ namespace MozscapeAPI.NET.Request
 			}
 			return uri.Host;
 		}
+		#endregion
 
 		/// <summary>
 		/// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:MozscapeAPI.NET.Request.ApiRequest"/>.

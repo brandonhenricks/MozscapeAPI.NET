@@ -26,11 +26,12 @@ namespace MozscapeAPI.NET.Services
 		/// Gets the response.
 		/// </summary>
 		/// <returns>The response.</returns>
-		/// <param name="targetUrl">Target URL.</param>
-		public IRestResponse GetResponse(string targetUrl)
+		/// <param name="apiRequest">API request.</param>
+		public IRestResponse GetResponse(IApiRequest apiRequest)
 		{
-			Ensure.That(targetUrl, nameof(targetUrl)).IsNotNullOrEmpty();
-			var restRequest = new RestRequest(targetUrl, Method.GET);
+			Ensure.That(apiRequest, nameof(apiRequest)).IsNotNull();
+
+			var restRequest = new RestRequest(apiRequest.TargetUrl, Method.GET);
 
 			return _restClient.Execute(restRequest);
 		}
@@ -39,11 +40,11 @@ namespace MozscapeAPI.NET.Services
 		/// Gets the response async.
 		/// </summary>
 		/// <returns>The response async.</returns>
-		/// <param name="targetUrl">Target URL.</param>
-		public Task<IRestResponse> GetResponseAsync(string targetUrl)
+		/// <param name="apiRequest">API request.</param>
+		public Task<IRestResponse> GetResponseAsync(IApiRequest apiRequest)
 		{
-			Ensure.That(targetUrl, nameof(targetUrl)).IsNotNullOrEmpty();
-			var restRequest = new RestRequest(targetUrl, Method.GET);
+			Ensure.That(apiRequest, nameof(apiRequest)).IsNotNull();
+			var restRequest = new RestRequest(apiRequest.TargetUrl, Method.GET);
 
 			return _restClient.ExecuteGetTaskAsync(restRequest);
 		}

@@ -1,7 +1,5 @@
 ﻿using System;
 using MozscapeAPI.NET.Interfaces;
-using RestSharp;
-using MozscapeAPI.NET.Services;
 using System.Threading.Tasks;
 using EnsureThat;
 using MozscapeAPI.NET.Enums;
@@ -12,10 +10,14 @@ namespace MozscapeAPI.NET
 {
 	public class MozApiClient : IMozApiClient
 	{
+		#region Public Properties
+
 		public string AccessId { get; }
 		public string SecretKey { get; }
 		public long ExpiresInterval { get; }
 		public string EndPoint { get; }
+
+		#endregion
 
 		#region Public Constructors
 
@@ -59,6 +61,11 @@ namespace MozscapeAPI.NET
 		}
 
 		public IApiRequest CreateApiRequest(IApiAuthorization apiAuthorization, string targetUrl, ApiType apiType, int cols, int limit)
+		{
+			return new ApiRequest(apiAuthorization, targetUrl, apiType, cols, limit);
+		}
+
+		public IApiRequest CreateApiRequest(IApiAuthorization apiAuthorization, string targetUrl, ApiType apiType, int cols, int limit, string scope, string filter)
 		{
 			return new ApiRequest(apiAuthorization, targetUrl, apiType, cols, limit);
 		}
