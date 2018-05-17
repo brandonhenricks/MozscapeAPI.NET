@@ -2,6 +2,7 @@
 using EnsureThat;
 using MozscapeAPI.NET.Enums;
 using MozscapeAPI.NET.Interfaces;
+using MozscapeAPI.NET.Authorization;
 namespace MozscapeAPI.NET.Request
 {
 	public class ApiRequest : IApiRequest
@@ -61,9 +62,9 @@ namespace MozscapeAPI.NET.Request
 		{
 			if (Limit > 0)
 			{
-				return String.Format("?{0}&cols={1}&limit={2}", TargetUrl, Cols, Limit);
+				return String.Format("?{0}&cols={1}&limit={2}&{3}", TargetUrl, Cols, Limit, Authorization.GetAuthenticationString());
 			}
-			return String.Format("?{0}&cols={1}", TargetUrl, Cols);
+			return String.Format("?{0}&cols={1}&{2}", TargetUrl, Cols, Authorization.GetAuthenticationString());
 		}
 	}
 }
