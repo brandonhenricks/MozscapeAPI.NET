@@ -2,7 +2,6 @@
 using EnsureThat;
 using MozscapeAPI.NET.Enums;
 using MozscapeAPI.NET.Interfaces;
-using MozscapeAPI.NET.Authorization;
 namespace MozscapeAPI.NET.Request
 {
 	public class ApiRequest : IApiRequest

@@ -3,8 +3,8 @@ namespace MozscapeAPI.NET.Interfaces
 {
 	public interface IApiAuthorization
 	{
-		String AccessId { get; }
-		String SecretKey { get; }
+		string AccessId { get; }
+		string SecretKey { get; }
 		long ExpiresInterval { get; }
 		String GetAuthenticationString();
 	}
