@@ -28,10 +28,9 @@ namespace MozscapeAPI.NET
 				throw new ArgumentNullException(nameof(apiAuthorization));
 			}
 
-			if (string.IsNullOrEmpty(endPoint))
-			{
-				throw new ArgumentNullException(nameof(endPoint));
-			}
+			Ensure.That(apiAuthorization, nameof(apiAuthorization)).IsNotNull();
+
+			Ensure.That(endPoint, nameof(endPoint)).IsNotNullOrEmpty();
 
 			_endPoint = endPoint;
 
