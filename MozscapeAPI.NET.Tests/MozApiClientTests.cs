@@ -31,11 +31,18 @@ namespace MozscapeAPI.NET.Tests
 		}
 
 		[Test]
-		public void MozApiClient_Constructor_Null_Endpoint_Throws_exception()
+		public void MozApiClient_Constructor_Null_Endpoint_Throws_Exception()
 		{
 			var apiAuth = Substitute.For<IApiAuthorization>();
 			Assert.Throws<ArgumentNullException>(() => new MozApiClient(apiAuth, null));
 		}
 
+		[Test]
+		public void MozApiClient_GetQuery_String_Null_Param_Throws_Exception()
+		{
+			var apiAuth = Substitute.For<IApiAuthorization>();
+			var apiClient = new MozApiClient(apiAuth, "http://test.com");
+			Assert.Throws<ArgumentNullException>(() => apiClient.GetQueryString(null, 0));
+		}
 	}
 }

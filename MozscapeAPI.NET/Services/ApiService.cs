@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using EnsureThat;
 using MozscapeAPI.NET.Interfaces;
 using RestSharp;
 
@@ -28,11 +29,7 @@ namespace MozscapeAPI.NET.Services
 		/// <param name="targetUrl">Target URL.</param>
 		public IRestResponse GetResponse(string targetUrl)
 		{
-			if (String.IsNullOrEmpty(targetUrl))
-			{
-				throw new ArgumentNullException(nameof(targetUrl));
-			}
-
+			Ensure.That(targetUrl).IsNotNullOrEmpty();
 			var restRequest = new RestRequest(targetUrl, Method.GET);
 
 			return _restClient.Execute(restRequest);
@@ -45,11 +42,7 @@ namespace MozscapeAPI.NET.Services
 		/// <param name="targetUrl">Target URL.</param>
 		public Task<IRestResponse> GetResponseAsync(string targetUrl)
 		{
-			if (String.IsNullOrEmpty(targetUrl))
-			{
-				throw new ArgumentNullException(nameof(targetUrl));
-			}
-
+			Ensure.That(targetUrl).IsNotNullOrEmpty();
 			var restRequest = new RestRequest(targetUrl, Method.GET);
 
 			return _restClient.ExecuteGetTaskAsync(restRequest);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Text;
+using EnsureThat;
 using MozscapeAPI.NET.Interfaces;
 
 namespace MozscapeAPI.NET.Authorization
@@ -16,16 +17,8 @@ namespace MozscapeAPI.NET.Authorization
 		#region Constructors
 		public ApiAuthorization(string accessId, string secretKey, long expiresInterval)
 		{
-			if (string.IsNullOrEmpty(accessId))
-			{
-				throw new ArgumentNullException(nameof(accessId), "accessId can not be null");
-			}
-
-			if (string.IsNullOrEmpty(secretKey))
-			{
-				throw new ArgumentNullException(nameof(secretKey), "secretKey can not be null");
-			}
-
+			Ensure.That(accessId).IsNotNullOrEmpty();
+			Ensure.That(secretKey).IsNotNullOrEmpty();
 			AccessId = accessId;
 			SecretKey = secretKey;
 			ExpiresInterval = expiresInterval;
@@ -50,15 +43,8 @@ namespace MozscapeAPI.NET.Authorization
 		#region Private Methods
 		private string GenerateSignature(string key, string content)
 		{
-			if (string.IsNullOrEmpty(key))
-			{
-				throw new ArgumentNullException(nameof(key), "key can not be null");
-			}
-
-			if (string.IsNullOrEmpty(content))
-			{
-				throw new ArgumentNullException(nameof(content), "content can not be null");
-			}
+			Ensure.That(key).IsNotNullOrEmpty();
+			Ensure.That(content).IsNotNullOrEmpty();
 
 			var hmac = new System.Security.Cryptography.HMACSHA1
 			{
@@ -71,7 +57,7 @@ namespace MozscapeAPI.NET.Authorization
 
 				return Convert.ToBase64String(signature);
 			}
-			catch (Exception ex)
+			catch (Exception ex) //TODO: Catch Specific Exception
 			{
 				throw ex;
 			}

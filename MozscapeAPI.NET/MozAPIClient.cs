@@ -3,6 +3,7 @@ using MozscapeAPI.NET.Interfaces;
 using RestSharp;
 using MozscapeAPI.NET.Services;
 using System.Threading.Tasks;
+using EnsureThat;
 
 namespace MozscapeAPI.NET
 {
@@ -30,6 +31,8 @@ namespace MozscapeAPI.NET
 
 		public T GetApiResult<T>(String targetUrl)
 		{
+			Ensure.That(targetUrl).IsNotNullOrEmpty();
+
 			var request = _apiService.GetResponse(targetUrl);
 
 			throw new NotImplementedException();
@@ -37,12 +40,14 @@ namespace MozscapeAPI.NET
 
 		public Task<T> GetApiResultAsync<T>(string targetUrl)
 		{
+			Ensure.That(targetUrl).IsNotNullOrEmpty();
 			var request = _apiService.GetResponseAsync(targetUrl);
 			throw new NotImplementedException();
 		}
 
 		public string GetQueryString(string targetUrl, int cols)
 		{
+			Ensure.That(targetUrl).IsNotNullOrEmpty();
 			throw new NotImplementedException();
 		}
 
