@@ -2,6 +2,8 @@
 using MozscapeAPI.NET.Interfaces;
 using RestSharp;
 using MozscapeAPI.NET.Services;
+using System.Threading.Tasks;
+
 namespace MozscapeAPI.NET
 {
 	public class MozApiClient : IMozApiClient
@@ -30,6 +32,17 @@ namespace MozscapeAPI.NET
 		{
 			var request = _apiService.GetResponse(targetUrl);
 
+			throw new NotImplementedException();
+		}
+
+		public Task<T> GetApiResultAsync<T>(string targetUrl)
+		{
+			var request = _apiService.GetResponseAsync(targetUrl);
+			throw new NotImplementedException();
+		}
+
+		public string GetQueryString(string targetUrl, int cols)
+		{
 			throw new NotImplementedException();
 		}
 
@@ -67,6 +80,7 @@ namespace MozscapeAPI.NET
 			// TODO: uncomment the following line if the finalizer is overridden above.
 			// GC.SuppressFinalize(this);
 		}
+
 		#endregion
 	}
 }
