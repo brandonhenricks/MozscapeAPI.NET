@@ -2,6 +2,7 @@
 using EnsureThat;
 using MozscapeAPI.NET.Enums;
 using MozscapeAPI.NET.Interfaces;
+using System.Net;
 namespace MozscapeAPI.NET.Request
 {
 	public class ApiRequest : IApiRequest
@@ -11,7 +12,8 @@ namespace MozscapeAPI.NET.Request
 		public ApiType ApiType { get; }
 		public int Cols { get; }
 		public int Limit { get; }
-
+		public string Scope { get; }
+		public string Sort { get; }
 		#region Public Constructors
 
 		/// <summary>
@@ -53,6 +55,16 @@ namespace MozscapeAPI.NET.Request
 
 		#endregion
 
+		public string GetSafeUrl()
+		{
+			var uri = new Uri(TargetUrl);
+			if (uri.LocalPath.Length > 1)
+			{
+				return WebUtility.UrlEncode(String.Format("{0}{1}", uri.Host, uri.LocalPath));
+			}
+			return uri.Host;
+		}
+
 		/// <summary>
 		/// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:MozscapeAPI.NET.Request.ApiRequest"/>.
 		/// </summary>
@@ -61,9 +73,10 @@ namespace MozscapeAPI.NET.Request
 		{
 			if (Limit > 0)
 			{
-				return String.Format("?{0}&cols={1}&limit={2}&{3}", TargetUrl, Cols, Limit, Authorization.GetAuthenticationString());
+				return String.Format("?{0}&cols={1}&limit={2}&{3}", GetSafeUrl(), Cols, Limit, Authorization.GetAuthenticationString());
 			}
-			return String.Format("?{0}&cols={1}&{2}", TargetUrl, Cols, Authorization.GetAuthenticationString());
+			return String.Format("?{0}&cols={1}&{2}", GetSafeUrl(), Cols, Authorization.GetAuthenticationString());
 		}
+
 	}
 }

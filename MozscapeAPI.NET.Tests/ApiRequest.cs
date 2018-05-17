@@ -56,5 +56,30 @@ namespace MozscapeAPI.NET.Tests
 
 			Assert.AreEqual(10, apiRequest.Limit);
 		}
+
+
+		[Test]
+		public void ApiRequest_GetSafeUrl_Returns_Not_Null()
+		{
+			var apiRequest = new ApiRequest(_apiAuthorization, "http://test.com", ApiType.ANCHORTEXT, 0, 10);
+
+			Assert.NotNull(apiRequest.GetSafeUrl());
+		}
+
+		[Test]
+		public void ApiRequest_GetSafeUrl_Returns_Correct_Result()
+		{
+			var apiRequest = new ApiRequest(_apiAuthorization, "http://test.com", ApiType.ANCHORTEXT, 0, 10);
+			var result = apiRequest.GetSafeUrl();
+			Assert.AreEqual("test.com", result);
+		}
+
+		[Test]
+		public void ApiRequest_GetSafeUrl_With_SubPage_Returns_Correct_Result()
+		{
+			var apiRequest = new ApiRequest(_apiAuthorization, "http://test.com/test", ApiType.ANCHORTEXT, 0, 10);
+			var result = apiRequest.GetSafeUrl();
+			Assert.AreNotEqual("test.com", result);
+		}
 	}
 }
