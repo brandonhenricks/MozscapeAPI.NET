@@ -3,6 +3,7 @@ using EnsureThat;
 using MozscapeAPI.NET.Enums;
 using MozscapeAPI.NET.Interfaces;
 using System.Net;
+using System.Text;
 namespace MozscapeAPI.NET.Request
 {
 	public class ApiRequest : IApiRequest
@@ -83,6 +84,10 @@ namespace MozscapeAPI.NET.Request
 		#endregion
 
 		#region Public Methods
+		/// <summary>
+		/// Gets the safe URL.
+		/// </summary>
+		/// <returns>The safe URL.</returns>
 		public string GetSafeUrl()
 		{
 			var uri = new Uri(TargetUrl);
@@ -92,6 +97,33 @@ namespace MozscapeAPI.NET.Request
 			}
 			return uri.Host;
 		}
+
+		/// <summary>
+		/// Gets the request URL.
+		/// </summary>
+		/// <returns>The request URL.</returns>
+		public string GetRequestUrl()
+		{
+			var sb = new StringBuilder();
+			sb.Append("?" + GetSafeUrl());
+			sb.Append("&Cols=" + Cols);
+
+			if (String.IsNullOrEmpty(Scope))
+			{
+				sb.Append("&Scope=" + Scope);
+			}
+
+			if (String.IsNullOrEmpty(Sort))
+			{
+				sb.Append("&Sort=" + Sort);
+			}
+
+			if (Limit > 0)
+			{
+				sb.Append("&Limit=" + Limit);
+			}
+			return String.Format("{0}&{1}", sb.ToString(), Authorization.GetAuthenticationString());
+		}
 		#endregion
 
 		/// <summary>
@@ -100,11 +132,7 @@ namespace MozscapeAPI.NET.Request
 		/// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:MozscapeAPI.NET.Request.ApiRequest"/>.</returns>
 		public override string ToString()
 		{
-			if (Limit > 0)
-			{
-				return String.Format("?{0}&cols={1}&limit={2}&{3}", GetSafeUrl(), Cols, Limit, Authorization.GetAuthenticationString());
-			}
-			return String.Format("?{0}&cols={1}&{2}", GetSafeUrl(), Cols, Authorization.GetAuthenticationString());
+			return GetRequestUrl();
 		}
 
 	}

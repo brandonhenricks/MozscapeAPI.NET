@@ -13,5 +13,6 @@ namespace MozscapeAPI.NET.Interfaces
 		string Scope { get; }
 		string Sort { get; }
 		string GetSafeUrl();
+		string GetRequestUrl();
 	}
 }
