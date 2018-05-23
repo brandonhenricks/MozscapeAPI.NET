@@ -60,5 +60,12 @@ namespace MozscapeAPI.NET.Tests
 			Assert.NotNull(apiAuth);
 
 		}
+
+		[Test]
+		public void MozApiClient_GetRestClient_Null_Argument_Throws_Exception()
+		{
+			var apiClient = new MozApiClient("test", "test", 1, "http://test.com");
+			Assert.Throws<ArgumentNullException>(() => apiClient.GetRestClient(null));
+		}
 	}
 }

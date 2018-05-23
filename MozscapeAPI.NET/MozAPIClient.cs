@@ -5,6 +5,11 @@ using EnsureThat;
 using MozscapeAPI.NET.Enums;
 using MozscapeAPI.NET.Request;
 using MozscapeAPI.NET.Authorization;
+using RestSharp;
+using MozscapeAPI.NET.Services;
+using System.Diagnostics.Contracts;
+using MozscapeAPI.NET.Constants;
+using System.Net;
 
 namespace MozscapeAPI.NET
 {
@@ -43,17 +48,29 @@ namespace MozscapeAPI.NET
 
 		#endregion
 
-		public T GetApiResult<T>(String targetUrl)
+		public IRestClient GetRestClient(IApiRequest apiRequest)
 		{
-			Ensure.That(targetUrl, nameof(targetUrl)).IsNotNullOrEmpty();
+			Ensure.That(apiRequest, nameof(apiRequest)).IsNotNull();
 
-			throw new NotImplementedException();
-		}
+			var endPointUrl = String.Empty;
 
-		public Task<T> GetApiResultAsync<T>(string targetUrl)
-		{
-			Ensure.That(targetUrl, nameof(targetUrl)).IsNotNullOrEmpty();
-			throw new NotImplementedException();
+			switch (apiRequest.ApiType)
+			{
+				case ApiType.TOP_PAGE:
+					endPointUrl = EndPoint + "/" + EndPointConstants.TOP_PAGE;
+					break;
+				case ApiType.ANCHORTEXT:
+					endPointUrl = EndPoint + "/" + EndPointConstants.ANCHOR_TEXT;
+					break;
+				case ApiType.LINKSCAPE:
+					endPointUrl = EndPoint + "/" + EndPointConstants.LINK_SCAPE;
+					break;
+				case ApiType.URL_METRICS:
+					endPointUrl = EndPoint + "/" + EndPointConstants.URL_METRICS;
+					break;
+
+			}
+			return new RestClient(endPointUrl);
 		}
 
 		public IApiAuthorization GetApiAuthorization()
@@ -69,6 +86,16 @@ namespace MozscapeAPI.NET
 		public IApiRequest CreateApiRequest(IApiAuthorization apiAuthorization, string targetUrl, ApiType apiType, int cols, int limit, string scope, string filter)
 		{
 			return new ApiRequest(apiAuthorization, targetUrl, apiType, cols, limit);
+		}
+
+		public Task<IRestResponse> GetRestResponseAsync(string targetUrl, IApiRequest apiRequest)
+		{
+			Ensure.That(targetUrl, nameof(targetUrl)).IsNotNullOrEmpty();
+			Ensure.That(apiRequest, nameof(apiRequest)).IsNotNull();
+			var restClient = GetRestClient(apiRequest);
+			var apiService = new ApiService(apiRequest.Authorization, restClient);
+
+			return apiService.GetResponseAsync(apiRequest);
 		}
 
 		#region IDisposable Support
