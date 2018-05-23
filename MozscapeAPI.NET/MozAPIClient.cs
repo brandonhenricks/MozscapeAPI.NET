@@ -33,6 +33,7 @@ namespace MozscapeAPI.NET
 			Ensure.That(accessId, nameof(accessId)).IsNotNullOrEmpty();
 			Ensure.That(secretKey, nameof(secretKey)).IsNotNullOrEmpty();
 			Ensure.That(expiresInterval, nameof(expiresInterval)).IsGt(0);
+			Ensure.That(endPoint, nameof(endPoint)).IsNotNullOrEmpty();
 
 			AccessId = accessId;
 			SecretKey = secretKey;

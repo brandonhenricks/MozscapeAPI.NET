@@ -30,9 +30,7 @@ namespace MozscapeAPI.NET.Services
 		public IRestResponse GetResponse(IApiRequest apiRequest)
 		{
 			Ensure.That(apiRequest, nameof(apiRequest)).IsNotNull();
-
 			var restRequest = new RestRequest(apiRequest.TargetUrl, Method.GET);
-
 			return _restClient.Execute(restRequest);
 		}
 
@@ -45,7 +43,6 @@ namespace MozscapeAPI.NET.Services
 		{
 			Ensure.That(apiRequest, nameof(apiRequest)).IsNotNull();
 			var restRequest = new RestRequest(apiRequest.TargetUrl, Method.GET);
-
 			return _restClient.ExecuteGetTaskAsync(restRequest);
 		}
 

@@ -25,6 +25,18 @@ namespace MozscapeAPI.NET.Tests
 		}
 
 		[Test]
+		public void ApiRequest_Null_Constructor_Argument_Scope_Throws_Exception()
+		{
+			Assert.Throws<ArgumentNullException>(() => new ApiRequest(_apiAuthorization, "test.com", ApiType.ANCHORTEXT, 0, null, "test"));
+		}
+
+		[Test]
+		public void ApiRequest_Null_Constructor_Argument_Sort_Throws_Exception()
+		{
+			Assert.Throws<ArgumentNullException>(() => new ApiRequest(_apiAuthorization, "test.com", ApiType.ANCHORTEXT, 0, "test", null));
+		}
+
+		[Test]
 		public void ApiRequest_TargetUrl_Argument_Set()
 		{
 			var apiRequest = new ApiRequest(_apiAuthorization, "http://test.com", ApiType.ANCHORTEXT, 0);

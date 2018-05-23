@@ -67,6 +67,8 @@ namespace MozscapeAPI.NET.Request
 		{
 			Ensure.That(targetUrl, nameof(targetUrl)).IsNotNullOrEmpty();
 			Ensure.That(apiAuthorization, nameof(apiAuthorization)).IsNotNull();
+			Ensure.That(scope, nameof(scope)).IsNotNullOrEmpty();
+			Ensure.That(sort, nameof(sort)).IsNotNullOrEmpty();
 			Authorization = apiAuthorization;
 			TargetUrl = targetUrl;
 			ApiType = apiType;
