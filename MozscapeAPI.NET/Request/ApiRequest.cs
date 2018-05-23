@@ -63,6 +63,8 @@ namespace MozscapeAPI.NET.Request
 		/// <param name="targetUrl">Target URL.</param>
 		/// <param name="apiType">API type.</param>
 		/// <param name="cols">Cols.</param>
+		/// <param name="scope">Scope.</param>
+		/// <param name="sort">Sort.</param>
 		public ApiRequest(IApiAuthorization apiAuthorization, string targetUrl, ApiType apiType, int cols, string scope, string sort)
 		{
 			Ensure.That(targetUrl, nameof(targetUrl)).IsNotNullOrEmpty();
